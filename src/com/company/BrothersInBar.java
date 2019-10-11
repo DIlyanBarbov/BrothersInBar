@@ -17,6 +17,7 @@ public class BrothersInBar {
         int numOfIterations = 1; // number of iterations performed
         for (int j = 0; j < numOfIterations; j++) { // first loop where j is less than numOfIterations(1)
 
+            for (int i = 0; i < intList.size(); i++) { // second loop that goes through the list
                 int numAtI = intList.get(i); // current num
                 if (currentNum != numAtI) { // checking if a the new number is different from the previous, thus resetting the counting
                     currentNum = numAtI;
