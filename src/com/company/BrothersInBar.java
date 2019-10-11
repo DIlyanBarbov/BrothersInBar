@@ -6,33 +6,38 @@ public class BrothersInBar {
 
     public static int brothersInTheBar(int[] glasses) {
         List<Integer> intList = new LinkedList<>();
+        // converting array into linked list
         for (int i : glasses) {
             intList.add(i);
         }
-        int num = Integer.MIN_VALUE;
-        int len = 0;
-        int shots = 0;
-        int numOfIterations = 1;
-        for (int j = 0; j < numOfIterations; j++) {
-            for (int i = 0; i < intList.size(); i++) {
-                int numAtI = intList.get(i);
-                if (num != numAtI) {
-                    num = numAtI;
+
+        int currentNum = Integer.MIN_VALUE; // current number
+        int len = 0; // length of consecutive numbers
+        int shots = 0; // number of shots drank
+        int numOfIterations = 1; // number of iterations performed
+        for (int j = 0; j < numOfIterations; j++) { // first loop where j is less than numOfIterations(1)
+
+                int numAtI = intList.get(i); // current num
+                if (currentNum != numAtI) { // checking if a the new number is different from the previous, thus resetting the counting
+                    currentNum = numAtI;
                     len = 1;
-                } else {
+                } else { // in the other case incrementing the length
                     len++;
                 }
-                if (len == 3) {
+                if (len == 3) { // checking every time if length has become 3
+                    // if yes removing the current and previous two elements
                     intList.remove(i);
                     intList.remove(i - 1);
                     intList.remove(i - 2);
-                    i = 0;
-                    len = 0;
-                    numOfIterations++;
-                    shots++;
+                    i = 0; // resetting i
+                    len = 0; // resetting len
+                    numOfIterations++; // increasing the number of iterations to be done on the list
+                    shots++; // incrementing shots drank
                 }
             }
-            len = 0;
+            len = 0; // resetting len again, because the previous iteration could finish with len at 2
+                     // and then if the first element of the array is the same as the last one
+                     // we could get and index out of bounds ex
         }
         return shots;
     }
@@ -44,11 +49,3 @@ public class BrothersInBar {
     }
 
 }
-/*
-{1, 1, 2, 3, 3, 3, 2, 2, 1, 1}
-{1, 1, 2, 1, 2, 2, 1, 1}
-{1, 1, 2, 1, 2, 2, 1, 1, 1, 3, 3, 3, 2, 4, 5, 5, 5}
-{5, 1, 1, 2, 2, 2, 1, 2, 2, 1, 1, 1, 2, 3, 3, 3, 2, 4, 5, 5, 5, 5, 5}
-{10, 3, 3, 3, 120000, 120000, 120000, -100000, -100000, -100000, -100000}
-{Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE, 10, 3, 3, 3, 120000, 120000, 120000, -100000, -100000, -100000, -100000}
- */
